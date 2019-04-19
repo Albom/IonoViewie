@@ -7,14 +7,12 @@ class RianIono:
     def __init__(self):
         self.data = None
         self.date = None
-        self.lat = 0
-        self.lon = 0
-        self.gyro = 0
-        self.dip = 0
-        self.sunspot = 0
-        self.station_name = 'IION'
         self.lat = 49.676
         self.lon = 36.292
+        self.gyro = 1.2
+        self.dip = 66.7
+        self.sunspot = 0
+        self.station_name = 'IION'
 
     def load(self, file_name):
         with open(file_name) as file:
