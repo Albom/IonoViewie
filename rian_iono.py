@@ -63,6 +63,15 @@ class RianIono:
                     max_val = self.data[h][f]
         self.data[0][0] = -max_val
 
+        with open('sn.dat') as file:
+            lines = [s.strip() for s in file.readlines()]
+
+        for line in lines:
+            t1 = [int(x) for x in line.split()]
+            t2 = self.date
+            if t1[0] == t2.year and t1[1] == t2.month and t1[2] == t2.day:
+                self.sunspot = t1[-1]
+
     def get_station_name(self):
         return self.station_name
 
