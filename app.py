@@ -303,9 +303,7 @@ class MainWindow(QMainWindow):
                 extent = self.iono.get_extent()
 
                 cmap = colors.ListedColormap([
-                    '#6E1E5A', '#782064', '#8C189A',
-                    '#FFFFFF',
-                    '#515151', '#474747', '#000000'])
+                   '#1010BF', '#104FEF', '#80AA80', '#DDAF00'])
 
                 self.ax.imshow(data, cmap=cmap, interpolation='nearest',
                                    extent=extent, aspect='auto')

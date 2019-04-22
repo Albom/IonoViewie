@@ -46,7 +46,7 @@ class RianIono:
                 self.frequencies.append(float(line.split()[-1].strip()))
 
             if i > index_data and i < index_end_of_data:
-                row = [float(x) for x in line.split()]
+                row = [log(float(x), 10) for x in line.split()]
                 data_temp[i - index_data - 1] = row
 
         self.n_rang = len(data_temp[0])
@@ -55,13 +55,9 @@ class RianIono:
         self.data = \
             [[0 for x in range(self.n_freq)] for y in range(self.n_rang)]
 
-        max_val = float('-inf')
         for f in range(self.n_freq):
             for h in range(self.n_rang):
                 self.data[h][f] = data_temp[f][self.n_rang - h - 1]
-                if self.data[h][f] > max_val:
-                    max_val = self.data[h][f]
-        self.data[0][0] = -max_val
 
         with open('sn.dat') as file:
             lines = [s.strip() for s in file.readlines()]
