@@ -1,5 +1,6 @@
 from math import log
 from datetime import datetime
+from sunspot_loader import SunspotLoader
 
 
 class RianIono:
@@ -59,14 +60,7 @@ class RianIono:
             for h in range(self.n_rang):
                 self.data[h][f] = data_temp[f][self.n_rang - h - 1]
 
-        with open('sn.dat') as file:
-            lines = [s.strip() for s in file.readlines()]
-
-        for line in lines:
-            t1 = [int(x) for x in line.split()]
-            t2 = self.date
-            if t1[0] == t2.year and t1[1] == t2.month and t1[2] == t2.day:
-                self.sunspot = t1[-1]
+        self.load_sunspot()
 
     def get_station_name(self):
         return self.station_name
@@ -110,3 +104,7 @@ class RianIono:
     def coord_to_freq(self, coord):
         step = self.frequencies[1] / self.frequencies[0]
         return step ** coord
+
+    def load_sunspot(self):
+        loader = SunspotLoader()
+        self.sunspot = loader.get(self.date)
