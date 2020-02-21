@@ -14,7 +14,7 @@ from matplotlib.backends.backend_qt5agg \
 import matplotlib.pyplot as plt
 from matplotlib import colors
 
-from rian_iono import RianIono
+from rinan_iono import RinanIono
 
 from filelist import FileList
 
@@ -290,7 +290,7 @@ class MainWindow(QMainWindow):
         if file_name and fnmatch(path.split(file_name)[-1], pattern):
             self.clear_all()
 
-            self.iono = RianIono()
+            self.iono = RinanIono()
 
             self.iono.load(file_name)
             data = self.iono.get_data()

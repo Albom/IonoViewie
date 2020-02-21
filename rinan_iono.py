@@ -3,7 +3,7 @@ from datetime import datetime
 from sunspot_loader import SunspotLoader
 
 
-class RianIono:
+class RinanIono:
 
     def __init__(self):
         self.data = None
@@ -100,12 +100,24 @@ class RianIono:
         return labels
 
     def freq_to_coord(self, freq):
-        step = self.frequencies[1] / self.frequencies[0]
-        return log(float(freq), step)
+        freq = float(freq)
+        i = self.__find_closest_freq(freq)
+        df = self.frequencies[i+1]-self.frequencies[i]
+        return i + (freq - self.frequencies[i]) / df
 
     def coord_to_freq(self, coord):
-        step = self.frequencies[1] / self.frequencies[0]
-        return step ** coord
+        f1 = self.frequencies[int(coord)]
+        f2 = self.frequencies[int(coord)+1]
+        df = f2 - f1
+        return f1 + (coord - int(coord)) * df
+    
+    def __find_closest_freq(self, freq):
+        if freq <= self.frequencies[0]:
+            return -1
+        for i, f in enumerate(self.frequencies):
+            if f - freq >= 0:
+                return i-1
+        return len(self.frequencies)-2
 
     def load_sunspot(self):
         loader = SunspotLoader()
